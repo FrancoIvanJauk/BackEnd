@@ -56,7 +56,7 @@ class Contenedor{
 
 
     async getAll(){
-      fs.promises.readFile('./productos.txt', 'utf-8')
+      fs.promises.readFile(this.user, 'utf-8')
       .then((participantesStr) => {
       const participantesObj = JSON.parse(participantesStr)
       console.log(participantesObj)
@@ -91,7 +91,7 @@ class Contenedor{
   }
 
   async productoRandom(){
-    fs.readFile('./productos.txt', 'utf-8',(error, data)=>{
+    fs.readFile( this.user , 'utf-8',(error, data)=>{
         if(error){
           console.log('Error al leer archivo')
         }else{
@@ -105,7 +105,7 @@ class Contenedor{
           if (productoRandom === undefined){
             console.log(null)
           }else{
-           console.log(productoRandom) 
+           console.log(productoRandom)
           }
         }
       })
