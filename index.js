@@ -1,27 +1,31 @@
 const express = require('express')
-const archivarProductos = require('./archivarProductos')
-const Contenedor = require('./funciones')
-archivarProductos
+const fs = require('fs')
 const app = express()
 
 const PORT = 8080
 
+const archivarProductos = require('./archivarProductos')
+archivarProductos
+const Contenedor = require('./funciones.js')
+let funciones = new Contenedor('productos.txt')
+
 
 
 app.get('/',(req, res)=>{
-    res.send('<h1> Home </h1>')
+
+    res.send('Home')
 })
 
-app.get('/productos',(req, res)=>{
-    let funciones = new Contenedor('productos.txt')
-    funciones.getAll()
-    res.send(`<h2>Productos</h2>`)
+app.get('/productos', async (req, res)=>{
+    const productos = await funciones.getAll()
+
+    res.send(productos)
 })
 
-app.get('/productoRandom',(req, res)=>{
-    let funciones = new Contenedor('productos.txt')
-    funciones.productoRandom()
-    res.send('<h2>Producto random</h2>')
+app.get('/productoRandom', async (req, res)=>{
+    const Productorandom = await funciones.productoRandom()
+
+    res.send(Productorandom)
 })
 
 const server = app.listen(PORT,()=>{
