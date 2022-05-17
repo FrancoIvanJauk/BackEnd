@@ -3,8 +3,9 @@ const fs = require('fs')
 module.exports = archivarProductos()
 
 function archivarProductos(){
+
 //Personas archivadas
-const productos = [
+let productos = [
   { categoria: 'pantalon', color: 'negro', id: 1 },
   { categoria: 'remera', color: 'blanco', id: 2 },
   { categoria: 'campera', color: 'azul', id: 3 }

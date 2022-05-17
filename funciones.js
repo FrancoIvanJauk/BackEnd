@@ -39,12 +39,25 @@ class Contenedor{
     }
     datos.push(nuevoProducto)
 
-    await this.write(datos, "Usuario Agregado")
+    await this.write(datos, "Producto Agregado")
   }
 
-  
-    static getById(){
-      const producto = productos.find((element) => {
+  async reemplazar(newProduct) {
+    let nuevoProducto = {}
+    let data = await this.read()
+    let datos = JSON.parse(data)
+
+    nuevoProducto = newProduct
+    datos.push(nuevoProducto)
+
+  await this.write(datos, "Producto Reemplazado")
+}
+
+
+    async getById(){
+      const productos = await funciones.getAll()
+      const ProductoObj = JSON.parse(productos)
+      const producto = ProductoObj.find((element) => {
        const buscarId = element.id === id
        return buscarId
      })
@@ -72,7 +85,7 @@ class Contenedor{
           const ProductoObj = JSON.parse(data)
           const producto = ProductoObj.filter((item)=> item.id !== id)
           const productoStr = JSON.stringify(producto, null, 2)
-          fs.promises.writeFile('./Archivos.txt', productoStr)
+          fs.promises.writeFile('./productos.txt', productoStr)
           console.log(`Se eliminó el id ${id}`)
         }
       })
@@ -110,30 +123,30 @@ class Contenedor{
 
 
 
-const nuevoProducto = new Contenedor('productos.txt')
-
+// const nuevoProducto = new Contenedor('productos.txt')
 
 
 // ejecutar funciones
 async function ejecutarFunciones() {
-  const newProduct = {
-    categoria: 'remera', color: 'rojo', id:[]
-  }
+  // const newProduct = {
+  //   categoria: 'remera', color: 'rojo', id:[]
+  // }
   
-  await nuevoProducto.save(newProduct)
+  // await nuevoProducto.save(newProduct)
 
-  await Contenedor.getById(id=2)
+  // await Contenedor.getById(id=2)
 
-  await Contenedor.getAll()
+  // await Contenedor.getAll()
 
-  setTimeout(function(){
-    Contenedor.delateById(id=1)
-  },2000)
+  // setTimeout(function(){
+  //   Contenedor.delateById(id=1)
+  // },2000)
 
-  setTimeout(function(){
-    Contenedor.deleteAll()
-  },5000)
+  // setTimeout(function(){
+  //   Contenedor.deleteAll()
+  // },5000)
 
 }
+// ejecutarFunciones()
 
 module.exports = Contenedor
