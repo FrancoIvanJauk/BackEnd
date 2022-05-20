@@ -4,6 +4,15 @@ const app = express()
 
 const PORT = 8080
 
+//para recibir formato json
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+
+//Static
+// app.use('/form',express.static(__dirname + '/public'))
+app.use(express.static(__dirname + "/public"))
+
 //Router
 const {Router} = express
 const productosRuter = Router()
@@ -11,20 +20,12 @@ app.use('/api/productos', productosRuter)
 
 
 //llamar a la funcion que escribe los datos de productos.txt
-// const archivarProductos = require('./archivarProductos')
-// archivarProductos
+const archivarProductos = require('./archivarProductos')
+archivarProductos
 
 //llamada al Contenedor de las funciones
 const Contenedor = require('./funciones.js')
 let funciones = new Contenedor('productos.txt')
-
-//para recibir formato json
-productosRuter.use(express.json())
-productosRuter.use(express.urlencoded({ extended: true }))
-
-
-//Static
-productosRuter.use('/form',express.static(__dirname + '/public'))
 
 
 productosRuter.get('', async (req, res)=>{
@@ -50,13 +51,6 @@ productosRuter.get('/:id',async(req, res)=>{
 })
 
 
-productosRuter.get('/calcular/productoRandom', async (req, res)=>{
-    const Productorandom = await funciones.productoRandom()
-
-    res.send(Productorandom)
-})
-
-
 productosRuter.post('', async (req, res)=>{
     const nuevoProducto = req.body
     console.log(nuevoProducto)
@@ -67,7 +61,6 @@ productosRuter.post('', async (req, res)=>{
 
 
 productosRuter.put('/:id',async(req, res)=>{
-
     const productos = await funciones.getAll()
     const ProductoObj = JSON.parse(productos)
     const idParams = Number(req.params.id)
