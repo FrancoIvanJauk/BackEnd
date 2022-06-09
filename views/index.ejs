@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head')%>
+</head>
+<body>
+    <header>
+        <%- include('./partials/header',{current: 'home'})%>
+    </header>
+
+    <main>
+
+    <% if (user[0].nombre === 'admin'){ %>
+
+        <br>
+            <h2>
+                Ingresa el Producto
+            </h2>
+        
+            
+            <form method="POST" action="/">
+                <div class="form-group">
+                  <label for="nombre">Nombre del producto</label>
+                  <input type="text" name="nombre" class="form-control" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                  <label for="descripcion">Descripción del producto</label>
+                  <input type="text" name="descripcion" class="form-control" placeholder="Descripción">
+                </div>
+                <div class="form-group">
+                  <label for="codigo">Código del producto</label>
+                  <input type="text" name="codigo" class="form-control" placeholder="Código">
+                </div>
+                <div class="form-group">
+                  <label for="imagen">Url de la imagen del producto</label>
+                  <input type="text" name="imagen" class="form-control" placeholder="Dirección de la imagen">
+                </div>
+                <div class="form-group">
+                  <label for="precio">Precio del producto</label>
+                  <input type="text" name="precio" class="form-control" placeholder="Precio">
+                </div>
+                <div class="form-group">
+                  <label for="stock">Stock del producto</label>
+                  <input type="number" name="stock" class="form-control" placeholder="stock">
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </form>
+              <br>
+
+              
+        <br>
+              <h2>
+                  Actualizar Producto
+              </h2>
+
+              <form method="POST" action="/actualizacion">
+                <div class="form-group">
+                  <label for="id">Poner el id del producto</label>
+                  <input type="text" name="id" class="form-control" placeholder="Id del producto">
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre actualizado del producto</label>
+                    <input type="text" name="nombre" class="form-control" placeholder="Nombre del producto">
+                  </div>
+                <div class="form-group">
+                  <label for="descripcion">Descripción actualizada del producto</label>
+                  <input type="text" name="descripcion" class="form-control" placeholder="Descripción del producto">
+                </div>
+                <div class="form-group">
+                  <label for="codigo">Codigo actualizado del producto</label>
+                  <input type="text" name="codigo" class="form-control" placeholder="Codigo del producto">
+                </div>
+                <div class="form-group">
+                  <label for="imagen">Imagen actualizada del producto</label>
+                  <input type="text" name="imagen" class="form-control" placeholder="Imagen del producto">
+                </div>
+                <div class="form-group">
+                  <label for="precio">Precio actualizado del producto</label>
+                  <input type="text" name="precio" class="form-control" placeholder="Precio del producto">
+                </div>
+                <div class="form-group">
+                  <label for="stock">Stock actualizado del producto</label>
+                  <input type="text" name="stock" class="form-control" placeholder="Stock del producto">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </form>
+
+              <br>
+
+
+              <h2>
+                Eliminar Producto
+            </h2>
+
+              <form method="POST" action="/borrarProducto">
+                <div class="form-group">
+                  <label for="borrarProductoId">Ponga el id del producto que desea eliminar</label>
+                  <input type="text" name="borrarProductoId" class="form-control" placeholder="Id del producto a eliminar">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </form>
+
+              <br>
+
+        <%}else{%>
+
+
+                <h1>Home</h1>
+                <br>
+                <h6>Ve a productos para elegir los que te gusten</h6>
+                <br>
+
+
+            <%}%>
+        </main>
+
+    <footer>
+        <%- include('./partials/footer')%>
+    </footer>
+</body>
+</html>

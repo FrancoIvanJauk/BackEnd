@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head')%>
+    </head>
+<body>
+    <header>
+        <%- include('./partials/header',{current: 'carrito'})%>
+    </header>
+
+    <main>
+        <div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+
+        <% if (carrito.length){ %>
+
+                    <% carrito.forEach((producto)=>{  %>
+
+                      <div class="card" style="width: 18rem; ">
+                        <img src=<%= producto.imagen%> class="card-img-top" alt="productos">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= producto.nombre%></h5>
+                          <p class="card-text"><%= producto.descripcion%></p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item"><b>Id: </b><%= producto.id%></li>
+                          <li class="list-group-item"><b>Codigo: </b><%= producto.codigo%></li>
+                          <li class="list-group-item"><b>Precio: </b>$<%= producto.precio%></li>
+                          <li class="list-group-item"><b>Stock: </b><%= producto.stock%></li>
+                        </ul>
+
+
+                      </div>
+
+                  <% }) %>
+    </div>
+    <form method="POST" action="/api/carrito">
+    <button  type="submit" class="btn btn-primary">Borrar todo</button>
+    </form>
+<br><br>
+    <form method="POST" action="/borrarProductoCarrito">
+        <div class="form-group">
+          <label for="borrarProductoId">Ponga el id del producto que desea eliminar</label>
+          <input type="text" name="borrarProductoId" class="form-control" placeholder="Id del producto a eliminar">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+
+    </div>
+
+     
+            
+            <%}else {%>
+                No hay productos seleccionados
+                <% } %>
+    </main>
+    
+    <footer>
+        <%- include('./partials/footer')%>
+    </footer>
+</body>
+</html>

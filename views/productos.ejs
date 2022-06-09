@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head')%>
+</head>
+<body>
+    <header>
+        <%- include('./partials/header',{current: 'productos'})%>
+    </header>
+    <main>
+        <h3>Productos</h3>
+<br>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+        <% if (nuevosProductos.length){ %>
+          
+                    <% nuevosProductos.forEach((producto)=>{  %>
+
+                      <div class="card" style="width: 18rem; ">
+                        <img src=<%= producto.imagen%> class="card-img-top" alt="productos">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= producto.nombre%></h5>
+                          <p class="card-text"><%= producto.descripcion%></p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item"><b>Id: </b><%= producto.id%></li>
+                          <li class="list-group-item"><b>Codigo: </b><%= producto.codigo%></li>
+                          <li class="list-group-item"><b>Precio: </b>$<%= producto.precio%></li>
+                          <li class="list-group-item"><b>Stock: </b><%= producto.stock%></li>
+                        </ul>
+
+
+                      </div>
+
+                  <% }) %> 
+
+
+                </div>
+                <br><br>
+                <h4>Eliga los productos que le gustaron</h4>
+
+                <form method="POST" action="/api/productos/carrito">
+
+                  <div class="form-group">
+                    <label for="id"></label>
+                    <input type="number" name="id" class="form-control" placeholder="Numero del Id">
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+     
+            
+            <%}else {%>
+                No hay productos
+                <% } %>
+
+    </main>
+
+
+    <footer>
+        <%- include('./partials/footer')%>
+    </footer>
+</body>
+</html>
